@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Recommender </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:300,500&amp;display=swap'>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    .movie {
+      height: 70vh;
+      margin-top: 15vh;
+      margin-bottom: 15vh;
+      margin-right: 5vh;
+      margin-left: 5vh;
+      display: block;
+      background-color: white;
+      border-radius: 20px;
+      padding: 1em;
+      width: auto;
+      box-shadow: 0px -10px 20px -5px #E2E2E2;
+      text-align: center;
+    }
+
+    @media screen and (max-width:600px) {
+      .movie {
+        margin-top: 12vh;
+        margin-bottom: 12vh;
+      }
+    }
+
+    table,
+    tr,
+    td,
+    th {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <div class="movie">
+    <h2><u>We Recommend the below movies for you</u></h2>
+    <table class="movie_table" align="center">
+      <tr>
+        <th>Movie Title</th>
+      </tr>
+      <tbody class="table_body">
+        <tr>
+          <td>{{ movie_names[0] }}</td>
+
+        </tr>
+        <tr>
+          <td>{{ movie_names[1] }}</td>
+
+        </tr>
+        <tr>
+          <td>{{ movie_names[2] }}</td>
+
+        </tr>
+        <tr>
+          <td>{{ movie_names[3] }}</td>
+
+        </tr>
+        <tr>
+          <td>{{ movie_names[4] }}</td>
+
+        </tr>
+
+      </tbody>
+    </table>
+    <br>
+
+
+</body>
+
+</html>
