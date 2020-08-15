@@ -5,69 +5,122 @@
   <meta charset="UTF-8">
   <title>Movie Recommender</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Poppins:300,500&amp;display=swap'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <style>
+    body,
     html {
-      box-sizing: border-box;
+      height: 100%;
+      overflow: hidden;
     }
 
-   
-
     .movie {
-      height: 70vh;
-      margin-top: 15vh;
-      margin-bottom: 15vh;
-      margin-right: 5vh;
-      margin-left: 5vh;
-      display: block;
-      background-color: white;
-      border-radius: 20px;
-      padding: 1em;
-      width: auto;
-      box-shadow: 0px 0px 10px -4px grey;
+      background: rgba(0, 0, 0, 0.6) url("https://i.redd.it/4fxxbm4opjd31.jpg");
+      background-blend-mode: darken;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+
+    .movie-text {
       text-align: center;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -30%);
+      color: whitesmoke;
+      text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+      font-size: xx-large;
+      font-style: italic;
     }
 
     #movie_name {
-      width: 70%;
-      padding: 1em;
-      border-radius: 5px;
-      text-align: center;
-      border: 1px solid grey;
+      width: 400px;
+      padding: 20px;
+      border-radius: 15px;
+
     }
 
     #submission_button {
-      width: 25%;
-      padding: 1em;
-      margin: 1em;
-      border-radius: 5px;
-      color: white;
-      background-color: dodgerblue;
-      border-style: none;
+      width: 150px;
+      padding: 10px;
+      border-radius: 15px;
+      background-color: gold;
+    }
+    .ui-autocomplete { 
+      position: absolute; cursor: default; 
+    }
+    
+    * html .ui-autocomplete { 
+      width:1px; 
+    }
+    .ui-menu {
+      list-style: none;
+      padding: 10px;
+      margin: 0;
+      display: block;
+      width: 227px;
     }
 
-    @media screen and (max-width:600px) {
-      .movie {
-        margin-top: 12vh;
-        margin-bottom: 12vh;
-      }
+    .ui-menu .ui-menu {
+      margin-top: -3px;
+    }
+
+    .ui-menu .ui-menu-item {
+      margin: 0;
+      padding: 0;
+      width: 200px;
+    }
+
+    .ui-menu .ui-menu-item a {
+      text-decoration: none;
+      display: block;
+      padding: .2em .4em;
+      line-height: 1.5;
+      zoom: 1;
+    }
+
+    .ui-menu .ui-menu-item a.ui-state-hover,
+    .ui-menu .ui-menu-item a.ui-state-active {
+      margin: -1px;
     }
   </style>
+
 </head>
 
 <body>
-
-  <!-- Demo -->
   <div class="movie">
-    <h2><u>Recommend Movies Similar To</u></h2>
-    <form action="{{ url_for('main') }}" method="POST">
-      <input type="text" id="movie_name" name="movie_name" placeholder="Enter a full movie name" required />
-      <input type="submit" id="submission_button" value="Submit" />
-    </form>
+    <div class="movie-text">
 
+      <h1>Movie Recommender</h1>
+      <form action="{{ url_for('main') }}" method="POST">
+        <input type="text" id="movie_name" name="movie_name" placeholder="Enter a movie name" required />
+        <input type="submit" id="submission_button" value="Submit" />
+      </form>
 
+    </div>
   </div>
+
+
+
+  <script type="text/javascript">
+
+    $(function () {
+      const availableTags = JSON.parse('{{ movie_list | tojson }}');
+      $("#movie_name").autocomplete({
+        source: availableTags,
+        dataType: 'json',
+        minLength: 1
+      });
+    });
+
+
+    $("#movie_name").keypress(function () {
+      $('.movie').css("background", "none");
+    });
+  </script>
 
 
 </body>
